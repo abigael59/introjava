@@ -1,10 +1,12 @@
 package fr.dampierre;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import javax.lang.model.util.ElementScanner14;
 import javax.swing.event.SwingPropertyChangeSupport;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+import javax.swing.plaf.synth.SynthStyle;
 
 public class App {
 
@@ -86,23 +88,101 @@ public class App {
     // }
     // }
 
-public class Couleurs {
-    public static void main(String[] args) {
-        Scanner clavier = new Scanner(System.in);
-        System.out.println("Entrez votre couleur (r,v,B)");
-        String couleur = clavier.nextLine();
-        clavier.close();
-            if(couleur.equals("r")||couleur.equals("R")){
-                System.out.println("Vous avez choisi le rouge.");
+    // public class Couleurs {
+    // public static void main(String[] args) {
+    // Scanner clavier = new Scanner(System.in);
+    // System.out.println("Entrez votre couleur (r,v,B)");
+    // String couleur = clavier.nextLine();
+    // clavier.close();
+    // if(couleur.equals("r")||couleur.equals("R")){
+    // System.out.println("Vous avez choisi le rouge.");
+    // }
+    // else if(couleur.equals("v")||couleur.equals("V")){
+    // System.out.println("Vous avez choisi le vert.");
+    // }
+    // else if(couleur.equals("b")||couleur.equals("B")){
+    // System.out.println("Vous avez choisi le bleu.");
+    // }
+    // else
+    // System.out.println("Connais pas.");
+
+    // }
+    // }
+
+    // jeu de l'oie
+    // public class jeu {
+    // public static void main(String[] args) {
+    // int laCase = 0;
+    // int nblancers = 5;
+    // int caseOjbectif = 20;
+
+    // boolean gagne = false;
+    // while (!gagne) {
+    // laCase = 0;
+    // for (int i = 1; i <= nblancers; i++) {
+    // // lancer le dé
+    // Random generateur = new Random();
+    // int lancer = generateur.nextInt(6) + 1;
+    // System.out.println("Vous avez fait " + lancer);
+
+    // // avancer le pion
+    // laCase = laCase + lancer;
+    // System.out.println("Vous etes sur la case" + laCase);
+    // }
+    // // test si on a gagné
+    // if (laCase == caseOjbectif) {
+    // System.out.println("Vous avez gagné !");
+    // gagne = true;
+    // } else {
+    // System.out.println("Vous avez perdu !");
+    // }
+    // }
+    // }
+    // }
+    // }
+
+    // DEVINER LE NOMBRE
+
+    private static boolean demanderSiOnContinue() {
+
+        boolean onContinue = true;
+        System.out.print("Voulez-vous recommencer (O/N) ? ");
+        Scanner sc = new Scanner(System.in);
+        String reponse = sc.nextLine();
+
+        if (!reponse.equals("o")) {
+            onContinue = false;
+        }
+
+        return onContinue;
+    }
+
+    public static void lancerJeu() {
+
+        Random rand = new Random();
+        int nombreADeviner = rand.nextInt(100) + 1;
+
+        System.out.println("Vous devez deviner un nombre entre 1 et 100.");
+        System.out.print("Entrez un nombre : ");
+
+        Scanner sc = new Scanner(System.in);
+        int nombreJoueur = sc.nextInt();
+
+        if (nombreADeviner == nombreJoueur) {
+            System.out.println("Quel bol, vous avez trouvé !");
+        } else {
+            System.out.println("PERDU !");
+            System.out.println("Je pensais à " + nombreADeviner);
+
+            int difference;
+            if (nombreADeviner > nombreJoueur) {
+                difference = nombreADeviner - nombreJoueur;
+            } else {
+                difference = nombreJoueur - nombreADeviner;
             }
-            else if(couleur.equals("v")||couleur.equals("V")){
-                System.out.println("Vous avez choisi le vert.");
-            }
-            else if(couleur.equals("b")||couleur.equals("B")){
-                System.out.println("Vous avez choisi le bleu.");
-            }
-            else
-                System.out.println("Connais pas.");
+
+            System.out.println("Vous étiez à " + difference + " de la bonne réponse.");
+        }
 
     }
 }
